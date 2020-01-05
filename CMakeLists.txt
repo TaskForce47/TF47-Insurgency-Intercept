@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.6)
 #----Make changes here
 
 #This is your project name. And also the filename of the resulting plugin.
-project (template-plugin)
+project (CBAStatemachineView)
 
 #This setting enables the use of the engine string type instead of converting to std::string.
 #Enabling this results in better performance when handling strings to SQF commands.
@@ -37,5 +37,15 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# Point CMake where to look for module files.
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/imgui-node-editor/Support/CMakeModules)
+
+
+add_subdirectory(imgui-node-editor/Examples/Common/Application)
+
 
 add_subdirectory(src)

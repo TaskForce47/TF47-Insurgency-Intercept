@@ -1,5 +1,5 @@
 class CfgPatches {
-	class intercept_template_plugin { //Change this
+	class CBAStatemachineView { //Change this
 		name = "Intercept Template Plugin"; //Change this
 		units[] = {};
 		weapons[] = {};
@@ -15,8 +15,8 @@ class CfgPatches {
 };
 class Intercept {
     class Dedmen { //Change this. It's either the name of your project if you have more than one plugin. Or just your name.
-        class template_plugin { //Change this.
-            pluginName = "template-plugin"; //Change this.
+        class CBAStatemachineView { //Change this.
+            pluginName = "CBAStatemachineView"; //Change this.
         };
     };
 };
