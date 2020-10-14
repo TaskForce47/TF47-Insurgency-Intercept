@@ -42,10 +42,4 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Point CMake where to look for module files.
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/imgui-node-editor/Support/CMakeModules)
-
-
-add_subdirectory(imgui-node-editor/Examples/Common/Application)
-
-
 add_subdirectory(src)
