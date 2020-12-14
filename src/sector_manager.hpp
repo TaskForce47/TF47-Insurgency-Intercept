@@ -24,7 +24,7 @@ namespace mission
 		std::vector<sector*> game_sectors;
 		std::vector<mission::sector_timestamp> active_sectors;
 
-		void generate_sectors(const int sector_length, int building_threshold);
+		void generate_sectors();
 		void cleanup();
 		mission::sector* find_nearest_sector(vector3_base<float> pos);
 		mission::sector* get_sector_by_id(vector2_base<int> sector);

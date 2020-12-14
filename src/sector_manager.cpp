@@ -1,5 +1,7 @@
 #include "sector_manager.hpp"
 
+#include "mission_config.hpp"
+
 void mission::sector_manager::sector_scanner()
 {
 	intercept::client::invoker_lock thread_lock;
@@ -73,10 +75,11 @@ void mission::sector_manager::sector_scanner()
 	sector_scanner_stop_signal = false;
 }
 
-void mission::sector_manager::generate_sectors(const int sector_length, int building_threshold)
+void mission::sector_manager::generate_sectors()
 {
+	auto* const config_data = mission_config::get();
 	const auto world_size = intercept::sqf::world_size();
-	cell_count = static_cast<int>(world_size / sector_length);
+	cell_count = static_cast<int>(world_size / config_data->sector_size);
 	sectors.resize(cell_count);
 	for (auto i = 0; i < cell_count; i++)
 		sectors[i].resize(cell_count);
@@ -86,8 +89,8 @@ void mission::sector_manager::generate_sectors(const int sector_length, int buil
 		for (auto j = 0; j < cell_count; j++)
 		{
 			sectors[i][j] = new mission::sector(
-				sector_length,
-				new vector3(i * sector_length, j * sector_length, 0),
+				config_data->sector_size,
+				new vector3(i * config_data->sector_size, j * config_data->sector_size, 0),
 				new vector2_base<int>(i, j));
 		}
 	}
@@ -101,12 +104,12 @@ void mission::sector_manager::generate_sectors(const int sector_length, int buil
 
 	intercept::sqf::system_chat(fmt::format("We have {} objects", terrain_objects.capacity()));
 
-	for (auto terrain_object : terrain_objects)
+	for (auto& terrain_object : terrain_objects)
 	{
 		const auto pos = intercept::sqf::get_pos(terrain_object);
 		if (pos.x < 0 || pos.x > world_size || pos.y < 0 || pos.y > world_size) continue;
-		int x = pos.x / sector_length;
-		int y = pos.y / sector_length;
+		int x = pos.x / config_data->sector_size;
+		int y = pos.y / config_data->sector_size;
 		sectors[x][y]->building_count++;
 	}
 
@@ -116,7 +119,7 @@ void mission::sector_manager::generate_sectors(const int sector_length, int buil
 		for (auto j = 0; j < cell_count; j++)
 		{
 			sector* sector = sectors[i][j];
-			if (sector->building_count > 0)
+			if (sector->building_count > config_data->sector_building_threshold)
 			{
 				game_sectors.push_back(sector);
 				sector->setup_marker();
