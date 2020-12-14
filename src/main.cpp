@@ -38,7 +38,7 @@ void intercept::post_init() {
 game_value generate_sectors(game_value_parameter sector_length, game_value_parameter building_threshold)
 {
 	intercept::sqf::system_chat(fmt::format("length: {}, threshold: {}", static_cast<int>(sector_length), static_cast<int>(building_threshold)));
-    manager.generate_sectors(sector_length, building_threshold);
+    manager.generate_sectors();
     return "Done!";
 }
 
