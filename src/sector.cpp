@@ -1,8 +1,8 @@
-#include "mission.hpp"
+#include "sector.hpp"
 
 std::vector<object> mission::library::get_players()
 {
-	std::vector<object> result;
+	std::vector<intercept::types::object> result;
 	auto players = intercept::sqf::all_players();
 	auto headless_clients = intercept::sqf::entities("HeadlessClient_F");
 	for (auto player : players)
@@ -18,7 +18,7 @@ vector2_base<int> mission::sector::get_sector_identifier() const
 	return *identifier;
 }
 
-void mission::sector::show_marker()
+void mission::sector::show_marker() const
 {
 	if (sector_maker.empty()) return;
 
