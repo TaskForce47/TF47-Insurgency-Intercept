@@ -2,6 +2,8 @@
 
 #include "intercept.hpp"
 #include "sector.hpp"
+#define FMT_HEADER_ONLY
+#include "../fmt/include/fmt/format.h"
 
 namespace mission
 {

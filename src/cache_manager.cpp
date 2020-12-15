@@ -95,7 +95,7 @@ void mission::cache_manager::create_hint()
 		const auto distance = rand() % (3000 - 1200) + 1200;
 		const auto marker_pos = intercept::sqf::get_pos(random_cache->cache_pos, distance, rand() % 360);
 		const auto marker = intercept::sqf::create_marker(
-			"df",
+			fmt::format("cache_{}-{}", static_cast<int>(marker_pos.x), static_cast<int>(marker_pos.y)),
 			marker_pos);
 		intercept::sqf::set_marker_type(marker, "HD_DOT");
 		random_cache->hint_markers.push_back(marker_pos);
@@ -105,7 +105,7 @@ void mission::cache_manager::create_hint()
 		const auto distance = rand() % (2400 - 800) + 800;
 		const auto marker_pos = intercept::sqf::get_pos(random_cache->cache_pos, distance, rand() % 360);
 		const auto marker = intercept::sqf::create_marker(
-			"df",
+			fmt::format("cache_{}-{}", static_cast<int>(marker_pos.x), static_cast<int>(marker_pos.y)),
 			marker_pos);
 		intercept::sqf::set_marker_type(marker, "HD_DOT");
 		random_cache->hint_markers.push_back(marker_pos);
@@ -115,7 +115,7 @@ void mission::cache_manager::create_hint()
 		const auto distance = rand() % (1000 - 250) + 250;
 		const auto marker_pos = intercept::sqf::get_pos(random_cache->cache_pos, distance, rand() % 360);
 		const auto marker = intercept::sqf::create_marker(
-			"df",
+			fmt::format("cache_{}-{}", static_cast<int>(marker_pos.x), static_cast<int>(marker_pos.y)),
 			marker_pos);
 		intercept::sqf::set_marker_type(marker, "HD_DOT");
 		random_cache->hint_markers.push_back(marker_pos);
