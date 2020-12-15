@@ -21,11 +21,11 @@ void mission::sector_manager::sector_scanner()
 		thread_lock.unlock();
 		for (auto& player_pos : players_pos)
 		{
-			const auto nearest_sector = find_nearest_sector(player_pos);
+			auto* const nearest_sector = find_nearest_sector(player_pos);
 			if (active_sectors.size() < max_active_sectors &&
 				nearest_sector->center_pos->distance_2d(player_pos) < sector_trigger_distance)
 			{
-				const auto sectors_to_trigger = std::min(std::max((int)active_sectors.size(), 10), 10);
+				const auto sectors_to_trigger = std::min(std::max(static_cast<int>(active_sectors.size()), 10), 10);
 
 				auto sectors_to_activate = find_adjacent_sectors(nearest_sector->get_sector_identifier(), 500, sectors_to_trigger);
 
@@ -49,7 +49,7 @@ void mission::sector_manager::sector_scanner()
 		{
 			if (active_sectors[i].timestamp + time_to_deactivate < time)
 			{
-				auto sector_to_test = active_sectors[i].sector;
+				auto* const sector_to_test = active_sectors[i].sector;
 				auto flag = false;
 				for (auto& player_pos : players_pos)
 				{
